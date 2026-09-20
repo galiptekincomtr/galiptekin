@@ -1,0 +1,47 @@
+---
+const mainCategories = [
+  { name: 'Dünya', href: '/dunya/' },
+  { name: 'Ekonomi', href: '/ekonomi/' },
+  { name: 'Bilim', href: '/bilim/' },
+  { name: 'Tarih', href: '/tarih/' },
+  { name: 'Sanat', href: '/sanat/' },
+];
+
+const categories = [
+  { name: 'Hayvanlar', href: '/hayvanlar/' },
+  { name: 'Seyahat', href: '/seyahat/' },
+  { name: 'Spor', href: '/spor/' },
+  { name: 'Finans', href: '/finans/' },
+  { name: 'Eğitim', href: '/egitim/' },
+  { name: 'Astroloji', href: '/astroloji/' },
+];
+---
+
+<div class="site-top">
+  <div class="container">
+    <span>Haberler, bilgi ve güncel içerikler</span>
+    <span>Galiptekin.com.tr</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-main">
+    <a href="/" class="site-logo" aria-label="Galiptekin.com.tr ana sayfa">
+      Galiptekin<span>.com.tr</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Ana menü">
+      {mainCategories.map((category) => (
+        <a href={category.href}>{category.name}</a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="category-bar">
+    <div class="container category-nav" aria-label="Kategoriler">
+      {categories.map((category) => (
+        <a href={category.href}>{category.name}</a>
+      ))}
+    </div>
+  </div>
+</header>
