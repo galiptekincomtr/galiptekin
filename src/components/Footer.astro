@@ -1,0 +1,139 @@
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo" aria-label="Galiptekin.com.tr ana sayfa">
+        Galiptekin<span>.com.tr</span>
+      </a>
+
+      <p>
+        Haberler, bilgi ve güncel içerikler.
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer menüsü">
+      <div>
+        <strong>İçerikler</strong>
+        <a href="/dunya/">Dünya</a>
+        <a href="/ekonomi/">Ekonomi</a>
+        <a href="/bilim/">Bilim</a>
+        <a href="/tarih/">Tarih</a>
+        <a href="/sanat/">Sanat</a>
+      </div>
+
+      <div>
+        <strong>Keşfet</strong>
+        <a href="/seyahat/">Seyahat</a>
+        <a href="/hayvanlar/">Hayvanlar</a>
+        <a href="/spor/">Spor</a>
+        <a href="/finans/">Finans</a>
+        <a href="/egitim/">Eğitim</a>
+      </div>
+
+      <div>
+        <strong>Kurumsal</strong>
+        <a href="/hakkimizda/">Hakkımızda</a>
+        <a href="/iletisim/">İletişim</a>
+        <a href="/gizlilik/">Gizlilik</a>
+        <a href="/kullanim-sartlari/">Kullanım Şartları</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© 2026 Galiptekin.com.tr</span>
+
+    <span>Tüm hakları saklıdır.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    background: #fafafa;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+    gap: 60px;
+    padding: 46px 0;
+  }
+
+  .footer-logo {
+    color: var(--site-blue);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+  }
+
+  .footer-logo span {
+    color: var(--text);
+  }
+
+  .footer-brand p {
+    max-width: 300px;
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .footer-nav div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-nav strong {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  .footer-nav a {
+    color: #667085;
+    font-size: 13px;
+    text-decoration: none;
+  }
+
+  .footer-nav a:hover {
+    color: var(--site-blue);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 0 24px;
+    border-top: 1px solid var(--border);
+    color: #8a93a0;
+    font-size: 12px;
+  }
+
+  @media (max-width: 800px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-bottom {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SeoSchema from '../../components/SeoSchema.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { news } from '../../data/news';
+
+export function getStaticPaths() {
+  return news.map((item) => ({
+    params: {
+      slug: item.slug,
+    },
+    props: {
+      item,
+    },
+  }));
+}
+
+const { item } = Astro.props;
+
+const articleUrl =
+  `https://galiptekin.com.tr/haber/${item.slug}/`;
+---
+
+<BaseLayout
+  title={`${item.title} - Galiptekin.com.tr`}
+  description={item.description}
+  image={item.image}
+>
+  <!-- NewsArticle schema -->
+  <SeoSchema
+    slot="head"
+    title={item.title}
+    description={item.description}
+    url={articleUrl}
+    image={item.image}
+    datePublished={item.datePublished}
+    dateModified={item.dateModified}
+    category={item.category}
+    authorName={item.author.name}
+    authorUrl={item.author.url}
+  />
+
+  <article class="article-page">
+
+    <!-- Breadcrumb -->
+    <Breadcrumb
+      category={item.category}
+      categoryUrl={item.categoryUrl}
+      title={item.title}
+    />
+
+    <!-- Haber başlığı -->
+    <header class="article-header">
+
+      <div class="article-category">
+        {item.category}
+      </div>
+
+      <h1>
+        {item.title}
+      </h1>
+
+      <p class="article-description">
+        {item.description}
+      </p>
+
+      <div class="article-meta">
+        <span>
+          {item.author.name}
+        </span>
+
+        <time datetime={item.datePublished}>
+          {new Date(item.datePublished).toLocaleDateString(
+            'tr-TR',
+            {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            }
+          )}
+        </time>
+
+        <span aria-hidden="true">•</span>
+
+        <time datetime={item.dateModified}>
+          Güncellendi:
+          {' '}
+          {new Date(item.dateModified).toLocaleDateString(
+            'tr-TR',
+            {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            }
+          )}
+        </time>
+      </div>
+
+    </header>
+
+    <!-- Ana haber görseli -->
+    <figure class="article-image">
+
+      <img
+        src={item.image}
+        alt={item.title}
+        width="1200"
+        height="675"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+
+    </figure>
+
+    <!-- Haber metni -->
+    <div class="article-content-wrapper">
+
+      <div
+        class="article-content"
+        set:html={item.content}
+      />
+
+      <!-- Kaynak / içerik bilgisi -->
+      <p class="source-info">
+        Bu içerikte yer alan bilgiler ilgili kaynaklara dayanmaktadır.
+        Analiz, düzenleme ve görsel sunum Galiptekin.com.tr tarafından
+        hazırlanmıştır.
+      </p>
+
+    </div>
+
+  </article>
+</BaseLayout>

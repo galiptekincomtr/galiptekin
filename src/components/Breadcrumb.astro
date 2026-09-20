@@ -1,0 +1,87 @@
+---
+interface Props {
+  category: string;
+  categoryUrl: string;
+  title: string;
+}
+
+const {
+  category,
+  categoryUrl,
+  title,
+} = Astro.props;
+
+const siteUrl = 'https://galiptekin.com.tr';
+
+const items = [
+  {
+    name: 'Ana Sayfa',
+    url: `${siteUrl}/`,
+  },
+  {
+    name: category,
+    url: `${siteUrl}${categoryUrl}`,
+  },
+  {
+    name: title,
+    url: `${siteUrl}${Astro.url.pathname}`,
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+};
+---
+
+<nav class="breadcrumb" aria-label="Sayfa yolu">
+  <a href="/">Ana Sayfa</a>
+  <span aria-hidden="true">›</span>
+
+  <a href={categoryUrl}>{category}</a>
+  <span aria-hidden="true">›</span>
+
+  <span class="current">{title}</span>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    color: #7b8491;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .breadcrumb a {
+    color: #667085;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--site-blue);
+  }
+
+  .breadcrumb span[aria-hidden='true'] {
+    color: #a5adb8;
+  }
+
+  .breadcrumb .current {
+    max-width: 100%;
+    overflow: hidden;
+    color: #8a93a0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

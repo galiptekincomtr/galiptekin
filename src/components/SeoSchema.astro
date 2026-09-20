@@ -1,0 +1,73 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+  category: string;
+  authorName: string;
+  authorUrl: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  category,
+  authorName,
+  authorUrl,
+} = Astro.props;
+
+const absoluteImage = new URL(image, 'https://galiptekin.com.tr').toString();
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'NewsArticle',
+      '@id': `${url}#newsarticle`,
+      url,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': url,
+      },
+      headline: title,
+      description,
+      image: [
+        {
+          '@type': 'ImageObject',
+          url: absoluteImage,
+          width: 1200,
+          height: 675,
+        },
+      ],
+      datePublished,
+      dateModified,
+      inLanguage: 'tr-TR',
+      articleSection: category,
+      author: {
+        '@type': 'Organization',
+        name: authorName,
+        url: authorUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Galiptekin.com.tr',
+        url: 'https://galiptekin.com.tr/',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://galiptekin.com.tr/logo.png',
+        },
+      },
+      isAccessibleForFree: true,
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
